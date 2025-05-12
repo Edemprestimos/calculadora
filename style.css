@@ -1,0 +1,418 @@
+/* Light Theme Variables (Default) */
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745; /* Verde para parcelas ímpares */
+    --text-color: #333;
+    --label-color: #343a40;
+    --bg-color: #f5f7fa;
+    --container-bg-color: white;
+    --input-bg-color: white;
+    --input-border-color: #dee2e6;
+    --step-icon-bg: #f8f9fa;
+    --step-icon-color: #6c757d;
+    --step-icon-border: #dee2e6;
+    --parcel-option-bg: #f8f9fa;
+    --parcel-option-border: #dee2e6;
+    --parcel-odd-color: var(--success-color); /* Verde para parcelas ímpares */
+    --parcel-even-color: var(--primary-color); /* Azul para parcelas pares */
+    --resumo-bg-color: #f8f9fa;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --progress-line-bg: #dee2e6;
+}
+
+/* Dark Theme Variables */
+body.dark-mode {
+    --primary-color: #5a7bff;
+    --secondary-color: #8c959d;
+    --success-color: #38b755;
+    --text-color: #e0e0e0;
+    --label-color: #c5c5c5;
+    --bg-color: #1a1a1a;
+    --container-bg-color: #2c2c2c;
+    --input-bg-color: #3a3a3a;
+    --input-border-color: #555;
+    --step-icon-bg: #3a3a3a;
+    --step-icon-color: #aaa;
+    --step-icon-border: #555;
+    --parcel-option-bg: #3a3a3a;
+    --parcel-option-border: #555;
+    --parcel-odd-color: var(--success-color);
+    --parcel-even-color: var(--primary-color);
+    --resumo-bg-color: #333;
+    --shadow-color: rgba(255, 255, 255, 0.05);
+    --progress-line-bg: #555;
+}
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.theme-switcher .btn {
+    background-color: var(--container-bg-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 8px 12px;
+}
+
+body.dark-mode .theme-switcher .btn {
+    background-color: var(--container-bg-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+.calculator-container {
+    background-color: var(--container-bg-color);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 769px) {
+    body {
+        padding: 20px;
+    }
+    .calculator-container {
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        min-height: auto;
+    }
+}
+
+
+.calculator-header {
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.calculator-header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calculator-steps {
+    padding: 15px 20px;
+    background-color: var(--container-bg-color);
+    border-bottom: 1px solid var(--input-border-color);
+    transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--step-icon-bg);
+    color: var(--step-icon-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 2px solid var(--step-icon-border);
+    transition: all 0.3s ease;
+}
+
+.step-label {
+    font-size: 0.7rem;
+    margin-top: 5px;
+    color: var(--step-icon-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.progress-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: var(--progress-line-bg);
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.progress-step.active .step-icon {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.progress-step.active .step-label {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.progress-step.completed .step-icon {
+    background-color: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+.progress-step.completed .step-label {
+    color: var(--success-color);
+}
+
+
+.calculator-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.etapa {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.etapa.ativa {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 600px) {
+    .form-row {
+        flex-direction: row;
+        gap: 15px;
+    }
+}
+
+
+.form-group {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--label-color);
+    transition: color 0.3s ease;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .form-group input[type="date"] {
+    color-scheme: dark;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent);
+    outline: none;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.currency-input {
+    position: relative;
+}
+
+.currency-input::before {
+    content: "R$";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+    color: var(--label-color);
+}
+
+.currency-input input {
+    padding-left: 35px !important;
+}
+
+.parcelas-container {
+    margin-top: 20px;
+}
+
+.parcelas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.parcela-option {
+    position: relative;
+}
+
+/* Estilos específicos para colunas par/ímpar */
+.parcela-option.parcela-impar input:checked + label {
+    background-color: var(--parcel-odd-color); /* Verde */
+    border-color: var(--parcel-odd-color);
+    color: white;
+}
+
+.parcela-option.parcela-par input:checked + label {
+    background-color: var(--parcel-even-color); /* Azul */
+    border-color: var(--parcel-even-color);
+    color: white;
+}
+
+.parcela-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.parcela-option label {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    background-color: var(--parcel-option-bg);
+    color: var(--text-color);
+    border: 1px solid var(--parcel-option-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    opacity: 1;
+}
+
+.resumo-container {
+    background-color: var(--resumo-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    margin-top: 20px;
+    transition: background-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--input-border-color);
+    transition: border-bottom-color 0.3s ease;
+}
+.resumo-item:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 480px) {
+    .calculator-header h1 {
+        font-size: 1.4rem;
+    }
+    .progress-step .step-label {
+        display: none;
+    }
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    .parcelas-grid {
+        grid-template-columns: 1fr; /* Volta para uma coluna em telas muito pequenas */
+    }
+}
