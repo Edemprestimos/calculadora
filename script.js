@@ -128,14 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isNaN(valorSolicitado) || valorSolicitado <= 0) { alert('Por favor, insira um valor desejado válido.'); return; }
         
         let minimo = 0;
-        if (faixaValorMax === 500) minimo = 0.01;
-        else if (faixaValorMax === 1000) minimo = 500.01;
-        else if (faixaValorMax === 1500) minimo = 1000.01;
-        else if (faixaValorMax === 2000) minimo = 1500.01;
-        else if (faixaValorMax === 2500) minimo = 2000.01;
-        else if (faixaValorMax === 3000) minimo = 2500.01;
-        else if (faixaValorMax === 5000) minimo = 3000.01;
-        else if (faixaValorMax === 10000) minimo = 5000.01;
+        if (faixaValorMax === 500) minimo = 0.00;
+        else if (faixaValorMax === 1000) minimo = 500.00;
+        else if (faixaValorMax === 1500) minimo = 1000.00;
+        else if (faixaValorMax === 2000) minimo = 1500.00;
+        else if (faixaValorMax === 2500) minimo = 2000.00;
+        else if (faixaValorMax === 3000) minimo = 2500.00;
+        else if (faixaValorMax === 5000) minimo = 3000.00;
+        else if (faixaValorMax === 10000) minimo = 5000.00;
         
         if (valorSolicitado < minimo ) {
              if (faixaValorMax !== 10000) {
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const dataMaximaParcela = new Date(dataBaseEmprestimo);
         dataMaximaParcela.setDate(dataMaximaParcela.getDate() + 33); 
 
-        const diasFixosPreferidos = [5, 10, 15, 20, 25];
+        const diasFixosPreferidos = [5, 10, 15, 20, 25, 30];
         let datasPossiveisSet = new Set();
 
         for (let i = 0; i <= 33; i++) {
@@ -298,8 +298,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const minParcelas = 3;
         const maxParcelas = 48;
         // Taxas MENSAIS base
-        const taxaMensalBaseInicial = 0.15; // 17% a.m. para 3x
-        const taxaMensalBaseFinal = 0.10;   // 7% a.m. para 48x
+        const taxaMensalBaseInicial = 0.8; // 17% a.m. para 3x
+        const taxaMensalBaseFinal = 0.2;   // 7% a.m. para 48x
 
         let colunaAtual = 0; // 0 para ímpar (verde), 1 para par (azul)
 
